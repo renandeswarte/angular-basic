@@ -1,0 +1,15 @@
+@import "reset";
+@import "bootstrap";
+@import "font-awesome";
+@import "variables";
+
+html {
+  * {
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  button {
+    border:none;
+    outline: none;
+  }
+}
