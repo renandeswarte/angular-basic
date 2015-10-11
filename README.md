@@ -1,6 +1,6 @@
 ###Simple Angular Structure
 
-Contains a npm server.
+Contains a node http server.
 
 ```
 npm start
