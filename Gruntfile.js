@@ -1,15 +1,21 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
+
     concat: {
       options: {
         separator: ';',
       },
       dist: {
-        src: 'public/client/*.js',
-        dest: 'public/dist/app.concat.js'
+        src: [
+        'app/**/*.js',
+        '!app/assets/js/*js',
+        '!app/bower_components/**/*js',
+        '!app/components/**/*js',
+        '!app/dist/**/*js'
+        ],
+        dest: 'app/dist/js/app.concat.js'
       }
     },
 
@@ -22,24 +28,29 @@ module.exports = function(grunt) {
           // style: 'compressed'
         },
         files: {                         // Dictionary of files 
-          'app/assets/css/app.css': 'app/assets/scss/app.scss',       // 'destination': 'source' 
+          'app/dist/css/app.css': 'app/assets/scss/app.scss',       // 'destination': 'source' 
         }
       }
     },
 
     uglify: {
       options: {
-        banner: '/*! app.js <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! app.js <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        preserveComments: false
       },
       build: {
-        src: 'public/dist/app.concat.js',
-        dest: 'public/dist/app.min.js'
+        src: 'app/dist/js/app.concat.js',
+        dest: 'app/dist/js/app.min.js'
       }
     },
 
     jshint: {
       files: [
-      'public/client/*.js'
+        'app/**/*.js',
+        '!app/assets/js/*js',
+        '!app/bower_components/**/*js',
+        '!app/components/**/*js',
+        '!app/dist/**/*js'
       ],
       options: {
         force: 'true',
@@ -54,33 +65,50 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-        'public/client/**/*.js',
-        'public/lib/**/*.js',
+          'app/**/*.js',
+          '!app/assets/js/*js',
+          '!app/bower_components/**/*js',
+          '!app/components/**/*js',
+          '!app/dist/**/*js'
         ],
         tasks: [
-        'concat',
-        'uglify'
+          'jshint',
+          'concat',
+          'uglify'
         ]
       },
       css: {
-        files: 'public/*.css',
-        tasks: ['cssmin']
+        files: 'app/assets/scss/*.scss',
+        tasks: ['sass']
+      }
+    },
+
+    "bower-install-simple": {
+      options: {
+        color: true,
+        directory: "app/bower_components"
+      },
+      "prod": {
+        options: {
+          production: true
+        }
+      },
+      "dev": {
+        options: {
+          production: false
+        }
       }
     },
 
     shell: {
-
-      'git-add-dist' : {
-        command: 'git add .'
+      view: {
+        command: 'open http://localhost:8000/app'
       },
-      'git-commit-build' : {
-        command: 'git commit -m "build"'
-      },
-      'heroku' : {
-        command: 'git push heroku master'
+      server:{
+        command: 'npm start'
       }
-      
     }
+
   });
 
 grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -89,6 +117,7 @@ grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-shell');
 grunt.loadNpmTasks('grunt-sass');
+grunt.loadNpmTasks("grunt-bower-install-simple");
 // grunt.loadNpmTasks('grunt-contrib-sass'); // Removed to used grunt-sass
 
 
@@ -110,30 +139,51 @@ grunt.loadNpmTasks('grunt-sass');
 //   grunt.task.run([ 'watch' ]);
 // });
 
+  grunt.registerTask('default', [
+    'watch'
+  ]);
+
+  // Compile all sass files
   grunt.registerTask('sass-compile', [
     'sass'
   ]);
 
-  grunt.registerTask('default', [
+  // Create and check file
+  grunt.registerTask('build', [
+    'jshint',
+    'concat',
+    'uglify',
     'sass'
   ]);
 
-  grunt.registerTask('build', [
-    'jshint', 'concat', 'uglify', 'cssmin'
+  // Install all dependencies and create files
+  grunt.registerTask('create', [
+    'bower-install-simple',
+    'build'
   ]);
 
-  grunt.registerTask('upload', function(n) {
-    if(grunt.option('prod')) {
-      // add your production server task here
-      grunt.task.run([ 'shell' ]);
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
+  // Open the HTML app file
+  grunt.registerTask('view', function () {
+    grunt.task.run([ 'shell:view' ]);
   });
 
-  grunt.registerTask('deploy', [
-    // add your deploy tasks here
-    'test', 'build', 'upload'
-  ]);
+  // Start local server
+  grunt.registerTask('server', function () {
+    grunt.task.run([ 'shell:server' ]);
+  });
+
+  // grunt.registerTask('upload', function(n) {
+  //   if(grunt.option('prod')) {
+  //     // add your production server task here
+  //     grunt.task.run([ 'shell' ]);
+  //   } else {
+  //     grunt.task.run([ 'server-dev' ]);
+  //   }
+  // });
+
+  // grunt.registerTask('deploy', [
+  //   // add your deploy tasks here
+  //   'test', 'build', 'upload'
+  // ]);
 
 };
