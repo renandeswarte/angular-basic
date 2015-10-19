@@ -7,8 +7,9 @@ $mainColor: #2C3E50;
 
 html {
   background-color: $mainColor;
+  -webkit-font-smoothing: antialiased;
   * {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family:"Lucida Sans Unicode", Helvetica, Arial, sans-serif;
     box-sizing: border-box;
   }
   button, .btn:focus, .btn, .btn.active {
@@ -39,7 +40,7 @@ header {
         &.user-tab {
           float: right;
           button {
-            padding: 2px 6px 1px;
+            padding: 1px 6px 0px;
             font-size: 12px;
           }
         }
@@ -58,6 +59,19 @@ header {
 footer {
   padding: 10px;
   background-color: #EEEEEE;
+  .app-version{
+    display: inline-block;
+  }
+  .footer-links {
+     float: right;
+    ul {
+      margin-bottom: 0px;
+      li {
+        display: inline-block;
+       padding: 0 5px;
+      }
+    }
+  }
 }
 
 .main-container {
@@ -66,65 +80,68 @@ footer {
   min-height: 500px;
 }
 
-.button-container {
-  text-align: center;
-  .btn {
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    min-width: 80px;
-    margin: 5px 5px;
-    &.inactive{
-      opacity: 0.5;
+.login-signup-page {
+  .button-container {
+    text-align: center;
+    .btn {
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      min-width: 80px;
+      margin: 5px 5px;
+      &.inactive{
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .forms-container {
+    margin-top: 30px;
+    position: relative;
+    padding-top: 400px;
+    .form-container {
+      position: absolute;
+      top: 0px;
+      -webkit-transition: all ease 0.3s;
+      transition: all ease 0.3s;
+      form {
+        background-color: #FFFFFF;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.3);
+      }
+      &.login-container {
+        left: 0px;
+        opacity: 1;
+        &.ng-hide:not(.ng-hide-animate) {
+          left: -400px;
+          opacity: 0;
+          display: block!important;
+        }
+      }
+      &.signup-container {
+        left: 0px;
+        opacity: 1;
+        &.ng-hide:not(.ng-hide-animate) {
+          left: 400px;
+          opacity: 0;
+          display: block!important;
+        }
+      }
+    }
+    .login-icon {
+      text-align: center;
+      color: #FFFFFF;
+      font-size: 100px;
+      margin-top: 20px;
+    }
+  }
+  .text {
+    color: #fff;
+    margin-bottom: 70px;
+    p {
+     font-size: 18px;
+     text-align: justify;
     }
   }
 }
 
-.forms-container {
-  margin-top: 30px;
-  position: relative;
-  .form-container {
-    background-color: #FFFFFF;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.3);
-    position: absolute;
-    top: 0px;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
-    &.login-container {
-      left: 0px;
-      opacity: 1;
-      &.ng-hide:not(.ng-hide-animate) {
-        left: -400px;
-        opacity: 0;
-        display: block!important;
-      }
-    }
-    &.signup-container {
-      left: 0px;
-      opacity: 1;
-      &.ng-hide:not(.ng-hide-animate) {
-        left: 400px;
-        opacity: 0;
-        display: block!important;
-      }
-    }
-  }
-}
-
-// //Angular animation
-// .animate-show {
-//   // line-height: 20px;
-//   left:0px;
-// }
-
-// .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-//   -webkit-transition: all linear 0.5s;
-//   transition: all linear 0.5s;
-// }
-
-// .animate-show.ng-hide {
-//   // line-height: 0;
-//   opacity: 0;
-//   padding: 0 10px;
-// }

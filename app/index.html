@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="dist/css/app.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <script src="assets/js/modernizr-2.8.3.min.js"></script>
   <script src="assets/js/jquery.min.js"></script>
 </head>
@@ -21,6 +21,7 @@
   <header>
     <nav class="container">
       <ul class="menu">
+      <li><a href="#/"><i class="fa fa-compass"></i></a></li>
         <li><a href="#/">Home</a></li>
         <li ng-show="authData"><a href="#/view1">View1</a></li>
         <li ng-show="authData"><a href="#/view2">View2</a></li>
@@ -41,7 +42,16 @@
 
 
   <footer>
-    <div>App version: v<span app-version></span></div>
+    <div class="inner-footer container">
+      <div class="app-version">App version: v<span app-version></span></div>
+      <div class="footer-links">
+        <ul>
+          <li>Contact Us</li>
+          <li>Team</li>
+          <li>Legals</li>
+        </ul>
+      </div>
+    </div>
   </footer>
   
 
