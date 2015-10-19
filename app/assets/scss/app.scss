@@ -11,9 +11,8 @@ html {
     font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box;
   }
-  button {
-    border:none;
-    outline: none;
+  button, .btn:focus, .btn, .btn.active {
+    outline: 0 !important;
   }
 }
 body {
@@ -24,13 +23,19 @@ p {
 }
 
 header {
+  background-color: #EEEEEE;
   nav{
-    background-color: #EEEEEE;
+    
     ul {
+      margin-bottom: 0px;
+      padding-left: 0px;
       li{
         color: $mainColor;
         padding: 10px;
         display: inline-block;
+        &.login-tab {
+          float: right;
+        }
         &.user-tab {
           float: right;
           button {
@@ -63,6 +68,15 @@ footer {
 
 .button-container {
   text-align: center;
+  .btn {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    min-width: 80px;
+    margin: 5px 5px;
+    &.inactive{
+      opacity: 0.5;
+    }
+  }
 }
 
 .forms-container {
