@@ -102,7 +102,12 @@ module.exports = function(grunt) {
 
     shell: {
       view: {
-        command: 'open http://localhost:8000/app'
+        command: 'open http://localhost:8000/app',
+        options: {
+            execOptions: {
+                maxBuffer: 500 * 1024 // or Infinity
+            }
+        }
       },
       server:{
         command: 'npm start'

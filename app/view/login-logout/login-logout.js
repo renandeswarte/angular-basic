@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.login-logout', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/login', {
+    templateUrl: 'view/login-logout/login-logout.html',
+    //controller: 'login-logout',
   });
 }])
 
@@ -18,6 +18,6 @@ angular.module('myApp.view1', ['ngRoute'])
   // click on `index.html` above to see it used in the DOM!
   // data is the model to define in the view and that will contain the data
   syncObject.$bindTo($scope, "data");
-  console.log(syncObject);
+  // console.log(syncObject);
 
 }]);

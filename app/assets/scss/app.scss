@@ -1,9 +1,12 @@
-@import "reset";
+// @import "reset";
 @import "bootstrap";
 @import "font-awesome";
 @import "variables";
 
+$mainColor: #2C3E50;
+
 html {
+  background-color: $mainColor;
   * {
     font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box;
@@ -13,3 +16,101 @@ html {
     outline: none;
   }
 }
+body {
+  background: none;
+}
+p {
+  color: #FFF;
+}
+
+header {
+  nav{
+    background-color: #EEEEEE;
+    ul {
+      li{
+        color: $mainColor;
+        padding: 10px;
+        display: inline-block;
+        &.user-tab {
+          float: right;
+          button {
+            padding: 2px 6px 1px;
+            font-size: 12px;
+          }
+        }
+        a {
+          color: $mainColor;
+          &:hover {
+            color: $mainColor;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  padding: 10px;
+  background-color: #EEEEEE;
+}
+
+.main-container {
+  padding-top: 20px;
+  padding-right: 20px;
+  min-height: 500px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.forms-container {
+  margin-top: 30px;
+  position: relative;
+  .form-container {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0px;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    &.login-container {
+      left: 0px;
+      opacity: 1;
+      &.ng-hide:not(.ng-hide-animate) {
+        left: -400px;
+        opacity: 0;
+        display: block!important;
+      }
+    }
+    &.signup-container {
+      left: 0px;
+      opacity: 1;
+      &.ng-hide:not(.ng-hide-animate) {
+        left: 400px;
+        opacity: 0;
+        display: block!important;
+      }
+    }
+  }
+}
+
+// //Angular animation
+// .animate-show {
+//   // line-height: 20px;
+//   left:0px;
+// }
+
+// .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+//   -webkit-transition: all linear 0.5s;
+//   transition: all linear 0.5s;
+// }
+
+// .animate-show.ng-hide {
+//   // line-height: 0;
+//   opacity: 0;
+//   padding: 0 10px;
+// }
